@@ -12,13 +12,9 @@ def install_package(package):
 		import pip
 		pip.main(['install', package])
 
-print 'Importing urllib2'
-install_package('urllib2')
-import urllib2
-print 'Imported Successfully'
-
 def internet_on():
 	try:
+		import urllib2
 		#To Do change the url to AWS server
 		urllib2.urlopen('http://google.com', timeout = 3)
 		print 'Server is reachable and available'
@@ -27,6 +23,12 @@ def internet_on():
 		print 'Not able to connect to AWS'
 		sys.exit()
 
-print 'Checking for AWS Availability...'
-internet_on()
-
+def detect_camera():
+	import subprocess
+	camdet = subprocess.check_output(["vcgencmd","get_camera"])
+	int(camdet.strip()[-1]) #-- Removes the final CR character and gets only the "0" or "1" from detected status
+	if (camdet):
+		print "Camera detected"
+	else:
+		print "not detected"
+		sys.exit()
