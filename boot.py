@@ -19,10 +19,12 @@ print 'Imported Successfully'
 
 def internet_on():
 	try:
-		urllib2.urlopen('http://216.58.192.142', timeout = 1)
+		#To Do change the url to AWS server
+		urllib2.urlopen('http://google.com', timeout = 1)
 		print 'Server is reachable and available'
 		return True
 	except	urllib2.URLError as err:
+		print 'Not able to connect to AWS'
 		sys.exit()
 
 print 'Checking for AWS Availability...'
