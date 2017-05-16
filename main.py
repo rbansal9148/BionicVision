@@ -1,7 +1,6 @@
-from boot import install_and_import
+from boot import internet_on
+from time import sleep
 
-install_and_import('time');
-#camera = picamera.PiCamera()
-print 'Testing Time import'
-time.sleep(5);
-print 'Succesfully imported'
+internet_on()
+sleep(5)
+print "Script Ended"
