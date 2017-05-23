@@ -1,4 +1,7 @@
 import sys
+import helper
+import time
+import json
 print 'Booting Up...'
 
 def install_package(package):
@@ -32,3 +35,26 @@ def detect_camera():
 	else:
 		print "not detected"
 		sys.exit()
+		
+def isAWSWorking():
+	_url = 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze'
+	K_file= open('./_key', 'r')
+	_key = K_file.readlines(1)[0]
+	key_length = len(_key)
+	_key = _key[:key_length-2]
+	_maxNumRetries = 10
+	params = {'visualFeatures' : 'Color, Categories, Description'} 
+	headers = dict()
+	headers['Ocp-Apim-Subscription-Key'] = _key
+	headers['Content-Type'] = 'application/octet-stream'
+	jsonObj = None
+	imageName = r'./TestImages/a1.jpeg'
+	time.sleep(2.0)
+	with open(imageName, 'rb') as f:
+		data = f.read()
+	result = helper.processRequest(json, _url, data, headers, params)
+	if result is not None:
+		description = helper.renderResult(result)
+		if 'woman' in description:
+			print 'Test Case 1# : Passed'
+			print 'AWS working correctly'

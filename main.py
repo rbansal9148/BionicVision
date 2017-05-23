@@ -2,6 +2,8 @@ import boot
 import helper
 from time import sleep
 
-boot.internet_on() #If no connect to AWS is established than it will exit
+boot.internet_on() #If no connection to AWS is established than it will exit
+print "Waiting 2 secs"
+sleep(2)
+boot.isAWSWorking()
 
-helper.output_audio('Hello World')
