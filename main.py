@@ -23,7 +23,7 @@ jsonObj = None
 
 camera = picamera.PiCamera()
 img_stream = BytesIO()
-camera.capture(img_stream, 'jpeg')
+camera.capture(img_stream, 'png')
 img=Image.open(img_stream)
 data = img.read()
 time.sleep(2.0)
