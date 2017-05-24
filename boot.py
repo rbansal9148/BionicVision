@@ -20,10 +20,10 @@ def internet_on():
 		import urllib2
 		#To Do change the url to AWS server
 		urllib2.urlopen('http://google.com', timeout = 3)
-		print 'Server is reachable and available'
+		print 'Internet is reachable and available'
 		return True
 	except	urllib2.URLError as err:
-		print 'Not able to connect to AWS'
+		print 'Not able to connect to Internet'
 		sys.exit()
 
 def detect_camera():
@@ -36,12 +36,9 @@ def detect_camera():
 		print "not detected"
 		sys.exit()
 		
-def isAWSWorking():
+def isMCSWorking():
 	_url = 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze'
-	K_file= open('./_key', 'r')
-	_key = K_file.readlines(1)[0]
-	key_length = len(_key)
-	_key = _key[:key_length-2]
+	_key = 'd1008b4f501046f1b3dc2994e3bc50c7'
 	_maxNumRetries = 10
 	params = {'visualFeatures' : 'Color, Categories, Description'} 
 	headers = dict()
@@ -56,5 +53,9 @@ def isAWSWorking():
 	if result is not None:
 		description = helper.renderResult(result)
 		if 'woman' in description:
-			print 'Test Case 1# : Passed'
-			print 'AWS working correctly'
+			print 'Test Case #1 : Passed'
+			print 'MCS working correctly'
+		else:
+			print 'Test Case #1 : FAILED!!'
+	else:
+		print "Empty Result!!"
