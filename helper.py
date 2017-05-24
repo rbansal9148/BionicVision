@@ -61,7 +61,6 @@ def processRequest( jsonObj, _url, data, headers, params):
             print( "Message: %s" % ( response.json()['message'] ) )
         break
     print('Complete!')
-    time.sleep(1.0)
     return result
 
 def renderResult (result) :

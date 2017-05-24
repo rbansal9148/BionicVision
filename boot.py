@@ -33,7 +33,7 @@ def detect_camera():
 	if (camdet):
 		print "Camera detected"
 	else:
-		print "not detected"
+		print "Camera not detected"
 		sys.exit()
 		
 def isMCSWorking():
