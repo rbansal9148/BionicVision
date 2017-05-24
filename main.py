@@ -20,7 +20,7 @@ headers['Ocp-Apim-Subscription-Key'] = _key
 headers['Content-Type'] = 'application/octet-stream'
 jsonObj = None
 
-with tempfile.NamedTemporaryFile(mode="rb") as jpg
+with tempfile.NamedTemporaryFile(mode="rb") as jpg:
 	camera = picamera.PiCamera()
 	print "Created camera instance"
 	camera.resolution = (1920, 1080)
