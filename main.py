@@ -3,6 +3,8 @@ import helper
 from time import sleep
 import tempfile
 import picamera
+from io import BytesIO
+from PIL import Image
 
 boot.detect_camera()
 boot.internet_on() #If no connection to MCS is established than it will exit
@@ -20,6 +22,10 @@ headers['Ocp-Apim-Subscription-Key'] = _key
 headers['Content-Type'] = 'application/octet-stream'
 jsonObj = None
 
+camera = picamera.PiCamera()
+camera.capture(img_stream, 'jpeg')
+img=Image.open(img_stream)
+data = img.read()
 with tempfile.NamedTemporaryFile(mode="rb") as jpg:
 	camera = picamera.PiCamera()
 	print "Created camera instance"
