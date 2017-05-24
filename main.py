@@ -3,7 +3,6 @@ import helper
 from time import sleep
 import picamera
 from io import BytesIO
-from PIL import Image
 
 boot.detect_camera()
 boot.internet_on() #If no connection to MCS is established than it will exit
@@ -22,9 +21,10 @@ headers['Content-Type'] = 'application/octet-stream'
 jsonObj = None
 
 camera = picamera.PiCamera()
-img_stream = BytesIO()
-camera.capture(img_stream, 'png')
-img=Image.open(img_stream)
+imageName = r'./abc.jpg'
+camera.capture(imageName)
+with open(imageName, 'rb') as f:
+	data = f.read()
 data = img.read()
 time.sleep(2.0)
 print "Sending Request"
