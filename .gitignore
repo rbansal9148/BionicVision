@@ -1,4 +1,8 @@
+# Key file
 key
+
+# Nano
+*.save*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
