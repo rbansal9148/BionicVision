@@ -4,6 +4,9 @@ key
 # Nano
 *.save*
 
+# Test Data
+TestImages/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
