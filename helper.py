@@ -1,19 +1,19 @@
 import time
 import requests
-import operator
-import numpy as np
-import json
-import urllib2
+
 
 def output_audio(aud):
 	from boot import install_package
 	from tempfile import TemporaryFile
-	install_package('gtts')
-	from gtts import gTTS
-	tts = gTTS(text = aud, lang = 'en', slow = True)
-	f = TemporaryFile()
-	tts.write_to_fp(f)
-	f.close()
+	install_package('espeak')
+	from espeak import espeak
+	# from gtts import gTTS
+	# tts = gTTS(text = aud, lang = 'en', slow = True)
+	# f = TemporaryFile()
+	# tts.write_to_fp(f)
+	# f.close()
+	espeak.synth(auth)
+
 
 def capture():
 	from io import BytesIO
@@ -25,10 +25,11 @@ def capture():
 	camera = PiCamera()
 	camera.start_preview()
 	# Camera warm-up time
-	sleep(2)
+	#sleep(2)
 	camera.capture(my_stream, 'jpeg')
 	return my_stream
-	
+
+
 def processRequest( jsonObj, _url, data, headers, params):
     print('Uploading...')
     retries = 0
@@ -36,22 +37,22 @@ def processRequest( jsonObj, _url, data, headers, params):
 
     while True:
         response = requests.request( 'post', _url, json = jsonObj, data = data, headers = headers, params = params )
-        if response.status_code == 429: 
+        if response.status_code == 429:
             print( "Message: %s" % ( response.json()['message'] ) )
-            if retries <= _maxNumRetries: 
+            if retries <= _maxNumRetries:
                 time.sleep(1)
                 retries += 1
                 continue
-            else: 
+            else:
                 print( 'Error: failed after retrying!' )
                 break
         elif response.status_code == 200 or response.status_code == 201:
-            if 'content-length' in response.headers and int(response.headers['content-length']) == 0: 
-                result = None 
-            elif 'content-type' in response.headers and isinstance(response.headers['content-type'], str): 
-                if 'application/json' in response.headers['content-type'].lower(): 
-                    result = response.json() #if response.content else None 
-                elif 'image' in response.headers['content-type'].lower(): 
+            if 'content-length' in response.headers and int(response.headers['content-length']) == 0:
+                result = None
+            elif 'content-type' in response.headers and isinstance(response.headers['content-type'], str):
+                if 'application/json' in response.headers['content-type'].lower():
+                    result = response.json() #if response.content else None
+                elif 'image' in response.headers['content-type'].lower():
                     result = response.content
         elif response.status_code == 401:
         	print "Invalid Subscription Key"

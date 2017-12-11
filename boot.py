@@ -4,6 +4,7 @@ import time
 import json
 print 'Booting Up...'
 
+
 def install_package(package):
 	import importlib
 	try:
@@ -14,6 +15,7 @@ def install_package(package):
 		print 'Installing' + package
 		import pip
 		pip.main(['install', package])
+
 
 def internet_on():
 	try:
@@ -26,6 +28,7 @@ def internet_on():
 		print 'Not able to connect to Internet'
 		sys.exit()
 
+
 def detect_camera():
 	import subprocess
 	camdet = subprocess.check_output(["vcgencmd","get_camera"])
@@ -35,18 +38,17 @@ def detect_camera():
 	else:
 		print "Camera not detected"
 		sys.exit()
-		
-def isMCSWorking():
-	_url = 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze'
-	_key = 'd1008b4f501046f1b3dc2994e3bc50c7'
+
+
+def isMCSWorking(_url, _key):
 	_maxNumRetries = 10
-	params = {'visualFeatures' : 'Color, Categories, Description'} 
+	params = {'visualFeatures' : 'Color, Categories, Description'}
 	headers = dict()
 	headers['Ocp-Apim-Subscription-Key'] = _key
 	headers['Content-Type'] = 'application/octet-stream'
 	jsonObj = None
 	imageName = r'./TestImages/a1.jpeg'
-	time.sleep(2.0)
+	#time.sleep(2.0)
 	with open(imageName, 'rb') as f:
 		data = f.read()
 	result = helper.processRequest(json, _url, data, headers, params)
@@ -58,4 +60,4 @@ def isMCSWorking():
 		else:
 			print 'Test Case #1 : FAILED!!'
 	else:
-		print "Empty Result!!"
+		print "Testing Failed: Empty Result!!"
