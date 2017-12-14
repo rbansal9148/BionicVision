@@ -24,7 +24,6 @@ def getkey():
 		sys.exit()
 
 def bootstrap(_key):
-	boot.detect_camera()
 	boot.internet_on()  # If no connection to MCS is established than it will exit
 	boot.isMCSWorking(_url, _key)
 
@@ -42,15 +41,10 @@ def camera_PR(_key, camera):
 	headers['Content-Type'] = 'application/octet-stream'
 	jsonObj = None
 
-	print 'start Test '
-
-#	camera = picamera.PiCamera()
 	imageName = r'./abc.jpg'
-        print 'Middle Test'
 	camera.capture(imageName)
 	with open(imageName, 'rb') as f:
 		data = f.read()
-        print 'end Test'
 	# sleep(2.0)
 	print "Sending Request..."
 	result = helper.processRequest(json, _url, data, headers, params)
