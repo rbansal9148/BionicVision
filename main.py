@@ -1,54 +1,30 @@
-import boot
-import helper
-from time import sleep
+import RPi.GPIO as GPIO
+import time
+import scene_descriptor
 import picamera
-from io import BytesIO
-import json
-import sys
 
+GPIO.setmode(GPIO.BCM)
 
-# Get these from MSC Cognitive Serivices
-_url = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze'
-# Store key in 'key' filename
-_key = ''
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+# Instatiate camera
+camera = picamera.PiCamera()
 
 try:
-	file = open(r'./key', 'r')
-	_key = file.read()
-	_key = _key[:-1]
-	# print _key
+	# True for  getting button responses
+	while True:
+    	button_state = GPIO.input(23)
+		
+    	if button_state == False:
+        	print('Capture And Detect...')
+       		time.sleep(0.2)
+       		key=scene_descriptor.getKey()
+        	key = '431346910fd7435180c72f27b72c5f8d'
+        	try:
+            	scene_descriptor.bootstrap(key)
+               scene_descriptor.camera_PR(key, camera)
+             except:
+               print "Some Unknown Error"
+
 except:
-	print "Key not found. Exiting..."
-	sys.exit()
-else:
-	file.close()
-
-boot.detect_camera()
-boot.internet_on()  # If no connection to MCS is established than it will exit
-boot.isMCSWorking(_url, _key)
-
-# API parameters
-#_url = 'https://southeastasia.api.cognitive.microsoft.com/vision/v1.0/analyze'
-#_url = 'https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/'
-
-
-_maxNumRetries = 10
-params = {'visualFeatures': 'Color, Categories, Description'}
-headers = dict()
-headers['Ocp-Apim-Subscription-Key'] = _key
-headers['Content-Type'] = 'application/octet-stream'
-jsonObj = None
-
-# camera = picamera.PiCamera()
-imageName = r'./abc.jpg'
-# camera.capture(imageName)
-with open(imageName, 'rb') as f:
-	data = f.read()
-
-# sleep(2.0)
-print "Sending Request..."
-result = helper.processRequest(json, _url, data, headers, params)
-if result is not None:
-	description = helper.renderResult(result)
-	print 'Output: "' + description + '"'
-	helper.output_audio(description)
+    GPIO.cleanup()

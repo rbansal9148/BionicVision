@@ -60,7 +60,7 @@ def processRequest( jsonObj, _url, data, headers, params):
             print( "Error code: %d" % ( response.status_code ) )
             print( "Message: %s" % ( response.json()['message'] ) )
         break
-    print('Complete!')
+    print('Request Completed!')
     return result
 
 def renderResult (result) :
