@@ -5,19 +5,6 @@ import json
 
 print 'Booting Up...'
 
-
-def install_package(package):
-	import importlib
-	try:
-		print 'Checking ' + package
-		importlib.import_module(package)
-	except ImportError:
-		print package + ' not found'
-		print 'Installing' + package
-		import pip
-		pip.main(['install', package])
-
-
 def internet_on():
 	try:
 		import urllib2
@@ -41,7 +28,7 @@ def detect_camera():
 		sys.exit()
 
 
-def isMCSWorking(_url, _key):
+def isMCSWorking(_url):
 	_maxNumRetries = 10
 	params = {'visualFeatures' : 'Color, Categories, Description'}
 	headers = dict()

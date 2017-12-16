@@ -5,7 +5,6 @@ import requests
 def output_audio(aud):
 	from boot import install_package
 	from tempfile import TemporaryFile
-	install_package('espeak')
 	from espeak import espeak
 	# from gtts import gTTS
 	# tts = gTTS(text = aud, lang = 'en', slow = True)
