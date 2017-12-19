@@ -27,12 +27,12 @@ helper.bootstrap_MSC(key)
 try:
 	# True for  getting button responses
 	while True:
-    	button_state1 = GPIO.input(pin1)
-    	button_state2 = GPIO.input(pin2)
-    	button_state3 = GPIO.input(pin3)
+		button_state1 = GPIO.input(pin1)
+		button_state2 = GPIO.input(pin2)
+		button_state3 = GPIO.input(pin3)
 
     	if button_state1 == False:
-        	print('Capture And Detect...')
+			print('Capture And Detect...')
 			helper.output_audio('Capture And Detect...')
 			# key = scene_descriptor.getKey()
         	try:
