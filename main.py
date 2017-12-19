@@ -5,19 +5,19 @@ import picamera
 import boot
 import OCR
 
-import button1
-import button2
-import button3
+#import button1
+#import button2
+#import button3
 
-GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BCM)
 
-pin1 = 26
-pin2 = 23
-pin3 = 16
+#pin1 = 26
+#pin2 = 23
+#pin3 = 16
 
-GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(pin3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+#GPIO.setup(pin3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # Instatiate camera
 camera = picamera.PiCamera()
@@ -25,7 +25,7 @@ boot.detect_camera()
 
 _key_DeepAI = 'aedb7e46-3664-494b-b30d-dfa5dff0429d'
 key = '431346910fd7435180c72f27b72c5f8d'
-helper.bootstrap_MSC(key)
+scene_descriptor.bootstrap_MSC(key)
 
 
 try:
@@ -38,12 +38,12 @@ try:
 		button_state3 = GPIO.input(pin3)
 
     	if button_state1 == False:
-			print('Capture And Detect...')
-			helper.output_audio('Capture And Detect...')
-			# key = scene_descriptor.getKey()
+		print('Capture And Detect...')
+		helper.output_audio('Capture And Detect...')
+		# key = scene_descriptor.getKey()
         	try:
         		scene_descriptor.camera_PR(key, camera)
-				scene_descriptor.camera_PR_DeepAI(_key_DeepAI, camera)
+			scene_descriptor.camera_PR_DeepAI(_key_DeepAI, camera)
     		except:
         		print "Some Unknown Error"
         		helper.output_audio("Some Unknown Error")

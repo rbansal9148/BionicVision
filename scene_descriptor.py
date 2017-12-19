@@ -40,7 +40,7 @@ def camera_PR_DeepAI(_key_DeepAI, camera):
 	    headers={'api-key': _key_DeepAI}
 	)
 
-	print(r.json().['output'])
+	print(r.json()['output'])
 
 def camera_PR(_key, camera):
 	params = {'visualFeatures': 'Color, Categories, Description'}

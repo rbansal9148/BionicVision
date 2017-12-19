@@ -28,7 +28,7 @@ def detect_camera():
 		sys.exit()
 
 
-def isMCSWorking(_url):
+def isMCSWorking(_url, _key):
 	_maxNumRetries = 10
 	params = {'visualFeatures' : 'Color, Categories, Description'}
 	headers = dict()
