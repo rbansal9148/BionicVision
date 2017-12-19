@@ -1,9 +1,9 @@
 import time
 import requests
+import pyttsx
 
 
 def output_audio(aud):
-	import pyttsx
 	engine = pyttsx.init()
 	engine.say(aud)
 	engine.runAndWait()

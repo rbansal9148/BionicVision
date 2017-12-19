@@ -5,6 +5,10 @@ import picamera
 import boot
 import OCR
 
+import button1
+import button2
+import button3
+
 GPIO.setmode(GPIO.BCM)
 
 pin1 = 26
@@ -27,6 +31,8 @@ helper.bootstrap_MSC(key)
 try:
 	# True for  getting button responses
 	while True:
+		print('Press a button')
+		helper.output_audio('Press a button...')
 		button_state1 = GPIO.input(pin1)
 		button_state2 = GPIO.input(pin2)
 		button_state3 = GPIO.input(pin3)
