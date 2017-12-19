@@ -3,15 +3,10 @@ import requests
 
 
 def output_audio(aud):
-	from boot import install_package
-	from tempfile import TemporaryFile
-	from espeak import espeak
-	# from gtts import gTTS
-	# tts = gTTS(text = aud, lang = 'en', slow = True)
-	# f = TemporaryFile()
-	# tts.write_to_fp(f)
-	# f.close()
-	espeak.synth(auth)
+	import pyttsx
+	engine = pyttsx.init()
+	engine.say(aud)
+	engine.runAndWait()
 
 
 def capture():
